@@ -10,13 +10,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 
-
 // parse incoming data
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON
 app.use(express.json());
 //link to assets!
 app.use(express.static('public'));
+
 
 //route that sends the user to the index page
 app.get("/", function(req, res) {
@@ -37,6 +37,19 @@ app.get("/api/notes", function(req, res) {
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "/public/index.html"));
 });
+
+
+// function to creat a new note
+function createNewNote(body, noteArray) {
+    const note = body;
+    noteArray.push(note);
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify({ note: noteArray }, null, 2)
+    );
+    return note
+}
+
 
 
 app.listen(PORT, () => {
