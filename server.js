@@ -8,20 +8,33 @@ const PORT = process.env.PORT || 3001;
 // start the server
 const app = express();
 
+
+
+
 // parse incoming data
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON
 app.use(express.json());
-// Pparse middleware for public files
+//link to assets!
 app.use(express.static('public'));
 
-//GET /notes 
-const { notes } = require('./data/db.json');
+//route that sends the user to the index page
+app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "public/index.html"));
+});
 
-//should return the notes.html file.
-function createNewNotes(body, )
+//route that sends the user to the notes page
+app.get("/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "public/notes.html"));
+});
 
-//GET * should return the index.html file.
+// that sends the user the db.json file
+app.get("/api/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "db.json"));
+});
+
+
+
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
