@@ -15,6 +15,14 @@ app.use(express.json());
 // Pparse middleware for public files
 app.use(express.static('public'));
 
+//GET /notes 
+const { notes } = require('./data/db.json');
+
+//should return the notes.html file.
+function createNewNotes(body, )
+
+//GET * should return the index.html file.
+
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
 });
