@@ -1,13 +1,13 @@
+// dependencies
 const express = require('express');
 const fs = require('fs');
 const path = require('path'); 
 
-// if port is any route or 3001
-const PORT = process.env.PORT || 3001;
 
 // start the server
 const app = express();
-
+// if port is any route or 3001
+const PORT = process.env.PORT || 3001;
 
 
 
@@ -28,12 +28,15 @@ app.get("/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
-// that sends the user the db.json file
+// route that sends the user the db.json file
 app.get("/api/notes", function(req, res) {
     res.sendFile(path.join(__dirname, "db.json"));
 });
 
-
+// route to index.html
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/public/index.html"));
+});
 
 
 app.listen(PORT, () => {
